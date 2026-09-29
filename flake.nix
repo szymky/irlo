@@ -6,8 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
       in
@@ -29,15 +35,17 @@
           ];
 
           env = {
-              RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+            RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
           };
 
           shellHook = ''
             echo "-> entered $(basename $PWD) dev shell"
             echo "-> rustc $(rustc --version)"
+            zsh
           '';
         };
 
         formatter = pkgs.nixpkgs-fmt;
-      });
+      }
+    );
 }
