@@ -1,3 +1,6 @@
 pub mod command;
 pub mod error;
 pub mod message;
+
+#[cfg(test)]
+mod tests;

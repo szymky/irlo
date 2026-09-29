@@ -1,2 +1,4 @@
 #[derive(Clone, PartialEq, Debug)]
-pub enum Command {}
+pub enum Command {
+    None,
+}
